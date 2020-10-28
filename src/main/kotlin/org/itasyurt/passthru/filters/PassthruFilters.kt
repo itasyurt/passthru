@@ -58,7 +58,6 @@ class PassthruPreFilter : ZuulFilter() {
 
     override fun shouldFilter() = true
 
-
     override fun filterType() = "pre"
 
     override fun filterOrder() = 1
@@ -76,7 +75,6 @@ class PassthruPreFilter : ZuulFilter() {
         ctx[PASSTRHU_CONTEXT] = passThru
         return Unit
     }
-
 
 }
 
@@ -107,10 +105,6 @@ class PassthruPostFilter : ZuulFilter() {
             val bytes = ctx.responseDataStream.readAllBytes()
 
             responseBody = CharStreams.toString(GZIPInputStream(bytes.inputStream()).reader())
-            // val bos = ByteArrayOutputStream()
-            // val gos = GZIPOutputStream(bos)
-            // gos.write(responseBody.toByteArray())
-            // gos.close()
             ctx.responseDataStream = bytes.inputStream()
 
         } else {
